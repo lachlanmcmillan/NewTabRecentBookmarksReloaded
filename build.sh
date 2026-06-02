@@ -14,7 +14,7 @@ sed -i '/	<script src="livereload.js"><\/script>/ d' ./src/newtab.html
 echo "[Firefox]"
 
 # Modify
-python3 ./preparebuild_firefox.py
+node ./preparebuild_firefox.js
 
 # Zip
 zipFilename="${projectName}-firefox.xpi"
@@ -34,7 +34,7 @@ echo ""
 echo "[Chrome]"
 
 # Modify
-python3 ./preparebuild_chrome.py
+node ./preparebuild_chrome.js
 
 # Zip
 zipFilename="${projectName}-chrome.zip"
