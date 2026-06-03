@@ -1,32 +1,25 @@
 {
-	"manifest_version": 2,
-	"name": "New Tab Recent Bookmarks",
-	"version": "9.0",
-	"description": "Show pinned folders and recent bookmarks on new tab page.",
-	"homepage_url": "https://github.com/Zren/NewTabRecentBookmarks",
-	"icons": {
-		"48": "icons/ntrb-logo-48.png",
-		"96": "icons/ntrb-logo-96.png"
-	},
-	"permissions": [
-		"bookmarks",
-		"storage",
-		"tabs"
-	],
-	"chrome_settings_overrides": {
-		"homepage": "newtab.html"
-	},
-	"chrome_url_overrides": {
-		"newtab": "newtab.html"
-	},
-	"background": {
-		"scripts": [
-			"browser-adapter.js",
-			"faviconcacher.js"
-		]
-	},
-	"options_ui": {
-		"page": "options.html",
-		"browser_style": true
-	}
+  "manifest_version": 2,
+  "name": "New Tab Recent Bookmarks",
+  "version": "9.0",
+  "description": "Show pinned folders and recent bookmarks on new tab page.",
+  "homepage_url": "https://github.com/Zren/NewTabRecentBookmarks",
+  "icons": {
+    "48": "icons/ntrb-logo-48.png",
+    "96": "icons/ntrb-logo-96.png"
+  },
+  "permissions": ["bookmarks", "storage", "tabs"],
+  "chrome_settings_overrides": {
+    "homepage": "newtab.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "background": {
+    "scripts": ["browser-adapter.js", "faviconcacher.js"]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  }
 }

@@ -1,40 +1,39 @@
 const configDefaults = {
-	recentBookmarksReversed: true,
-	bookmarkFoldersReversed: false,
-}
+  recentBookmarksReversed: true,
+  bookmarkFoldersReversed: false,
+};
 
 function restoreOptions() {
-	document.querySelectorAll('input[data-config-key]').forEach(function(input){
-		var configKey = input.getAttribute('data-config-key')
-		var defaultValue = configDefaults[configKey]
-		var keyDefaults = {}
-		keyDefaults[configKey] = defaultValue
-		browserAPI.storage.local.get(keyDefaults, function(items){
-			var configValue = items[configKey]
-			input.checked = configValue
-		})
-	})
+  document.querySelectorAll('input[data-config-key]').forEach(function (input) {
+    var configKey = input.getAttribute('data-config-key');
+    var defaultValue = configDefaults[configKey];
+    var keyDefaults = {};
+    keyDefaults[configKey] = defaultValue;
+    browserAPI.storage.local.get(keyDefaults, function (items) {
+      var configValue = items[configKey];
+      input.checked = configValue;
+    });
+  });
 }
 
 function onOptionCheckboxChanged(event) {
-	var input = event.target
-	var configKey = input.getAttribute('data-config-key')
-	var newValue = input.checked
-	var keyValues = {}
-	keyValues[configKey] = newValue
-	browserAPI.storage.local.set(keyValues, function(){})
+  var input = event.target;
+  var configKey = input.getAttribute('data-config-key');
+  var newValue = input.checked;
+  var keyValues = {};
+  keyValues[configKey] = newValue;
+  browserAPI.storage.local.set(keyValues, function () {});
 }
 
 function bindOptionInputs() {
-	document.querySelectorAll('input[data-config-key]').forEach(function(input){
-		input.addEventListener('change', onOptionCheckboxChanged)
-	})
+  document.querySelectorAll('input[data-config-key]').forEach(function (input) {
+    input.addEventListener('change', onOptionCheckboxChanged);
+  });
 }
 
 function onLoad() {
-	restoreOptions()
-	bindOptionInputs()
+  restoreOptions();
+  bindOptionInputs();
 }
 
-
-document.addEventListener('DOMContentLoaded', onLoad)
+document.addEventListener('DOMContentLoaded', onLoad);

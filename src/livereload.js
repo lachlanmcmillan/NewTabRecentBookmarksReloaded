@@ -1,24 +1,25 @@
-
-var watchCache = {}
+var watchCache = {};
 
 function watchFile(filepath) {
-	function checkFile() {
-		fetch(filepath).then(function(res){
-			return res.text()
-		}).then(function(text){
-			var oldValue = watchCache[filepath]
-			if (typeof oldValue === 'undefined') {
-				watchCache[filepath] = text
-			} else if (oldValue != text) {
-				document.location.reload()
-			}
-		})
-	}
+  function checkFile() {
+    fetch(filepath)
+      .then(function (res) {
+        return res.text();
+      })
+      .then(function (text) {
+        var oldValue = watchCache[filepath];
+        if (typeof oldValue === 'undefined') {
+          watchCache[filepath] = text;
+        } else if (oldValue != text) {
+          document.location.reload();
+        }
+      });
+  }
 
-	setInterval(checkFile, 500)
+  setInterval(checkFile, 500);
 }
 
-watchFile('newtab.html')
-watchFile('newtab.js')
-watchFile('newtab.css')
-watchFile('newtab-firefox.css')
+watchFile('newtab.html');
+watchFile('newtab.js');
+watchFile('newtab.css');
+watchFile('newtab-firefox.css');
