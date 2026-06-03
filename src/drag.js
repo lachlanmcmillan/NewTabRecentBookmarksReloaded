@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
-
-// Inherits config from newtab.js
+import { browserAPI } from './browser-adapter.js';
+import { config, canModifyGroup, insertBeforePinnedFolder } from './newtab.js';
 
 var draggedGroup = null;
 var draggedEntry = null;

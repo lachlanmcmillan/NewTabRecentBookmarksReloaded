@@ -1,5 +1,11 @@
-// browserAPI, isFirefox, isChrome, detectBookmark, detectFolder, getFaviconURL
-// are provided by browser-adapter.js
+import {
+  browserAPI,
+  isChrome,
+  detectBookmark,
+  detectFolder,
+  getFaviconURL,
+} from './browser-adapter.js';
+import { configDefaults } from './config.js';
 
 var useSvgIcons = true;
 var pageLoaded = false;
@@ -7,11 +13,7 @@ var cache = {
   pinnedFolders: [],
   faviconHostnameList: [],
 };
-const configDefaults = {
-  recentBookmarksReversed: true,
-  bookmarkFoldersReversed: false,
-};
-var config = configDefaults;
+export var config = configDefaults;
 
 // https://stackoverflow.com/questions/24004791/can-someone-explain-the-debounce-function-in-javascript
 function debounce(func, wait, immediate) {
@@ -1002,3 +1004,5 @@ if (pageLoaded) {
 } else {
   document.addEventListener('DOMContentLoaded', init);
 }
+
+export { canModifyGroup, insertBeforePinnedFolder };

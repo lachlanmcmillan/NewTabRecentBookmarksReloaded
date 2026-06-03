@@ -16,7 +16,7 @@
     "newtab": "newtab.html"
   },
   "background": {
-    "scripts": ["browser-adapter.js", "faviconcacher.js"]
+    "scripts": ["faviconcacher.js"]
   },
   "options_ui": {
     "page": "options.html",

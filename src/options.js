@@ -1,7 +1,5 @@
-const configDefaults = {
-  recentBookmarksReversed: true,
-  bookmarkFoldersReversed: false,
-};
+import { browserAPI } from './browser-adapter.js';
+import { configDefaults } from './config.js';
 
 function restoreOptions() {
   document.querySelectorAll('input[data-config-key]').forEach(function (input) {

@@ -15,4 +15,4 @@ if (tabsIdx !== -1) manifest.permissions.splice(tabsIdx, 1);
 if (!manifest.permissions.includes("favicon"))
   manifest.permissions.push("favicon");
 
-fs.writeFileSync("./src/manifest.json", JSON.stringify(manifest, null, "\t"));
+fs.writeFileSync("./dist/manifest.json", JSON.stringify(manifest, null, "\t"));

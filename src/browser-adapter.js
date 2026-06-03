@@ -6,10 +6,10 @@
 //
 // Load this script before any other extension scripts.
 
-var isFirefox = typeof browser !== 'undefined';
-var isChrome = !isFirefox;
+export var isFirefox = typeof browser !== 'undefined';
+export var isChrome = !isFirefox;
 
-var browserAPI = (function () {
+export var browserAPI = (function () {
   var api = chrome;
 
   // Wraps a callback-based Chrome API method so it also supports promises.
@@ -81,20 +81,20 @@ var browserAPI = (function () {
 })();
 
 // Chrome does not set bookmark.type, Firefox does.
-function detectBookmark(bookmark) {
+export function detectBookmark(bookmark) {
   return typeof bookmark.type !== 'undefined'
     ? bookmark.type === 'bookmark'
     : typeof bookmark.dateGroupModified === 'undefined';
 }
 
-function detectFolder(bookmark) {
+export function detectFolder(bookmark) {
   return typeof bookmark.type !== 'undefined'
     ? bookmark.type === 'folder'
     : typeof bookmark.dateGroupModified !== 'undefined';
 }
 
 // Chrome uses a built-in favicon API. Firefox uses the favicon cacher background script.
-function getFaviconURL(url) {
+export function getFaviconURL(url) {
   if (!isChrome) {
     return null;
   }

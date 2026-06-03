@@ -1,4 +1,4 @@
-// browserAPI, isFirefox provided by browser-adapter.js
+import { browserAPI, isFirefox } from './browser-adapter.js';
 
 function cacheFavicon(hostname, favIconUrl) {
   browserAPI.storage.local.get(
