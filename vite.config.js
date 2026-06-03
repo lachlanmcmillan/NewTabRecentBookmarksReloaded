@@ -5,6 +5,23 @@ import { cpSync } from 'fs';
 export default defineConfig({
   root: 'src',
   base: './',
+  esbuild: {
+    jsxFactory: 'h',
+    jsxFragment: 'Fragment',
+    jsxInject: `import { h, Fragment } from 'preact'`,
+  },
+  plugins: [
+    {
+      name: 'copy-extension-files',
+      writeBundle() {
+        cpSync(
+          resolve(__dirname, 'src/icons'),
+          resolve(__dirname, 'dist/icons'),
+          { recursive: true },
+        );
+      },
+    },
+  ],
   build: {
     outDir: resolve(__dirname, 'dist'),
     emptyOutDir: true,
@@ -22,16 +39,4 @@ export default defineConfig({
       },
     },
   },
-  plugins: [
-    {
-      name: 'copy-extension-files',
-      writeBundle() {
-        cpSync(
-          resolve(__dirname, 'src/icons'),
-          resolve(__dirname, 'dist/icons'),
-          { recursive: true },
-        );
-      },
-    },
-  ],
 });
