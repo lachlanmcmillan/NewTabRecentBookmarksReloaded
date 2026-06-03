@@ -1,7 +1,4 @@
-// Version 1
-
-var isFirefox = typeof browser !== 'undefined'
-var browserAPI = chrome
+// browserAPI, isFirefox provided by browser-adapter.js
 
 function cacheFavicon(hostname, favIconUrl) {
 	browserAPI.storage.local.get({

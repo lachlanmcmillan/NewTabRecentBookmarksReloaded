@@ -21,6 +21,7 @@
 	},
 	"background": {
 		"scripts": [
+			"browser-adapter.js",
 			"faviconcacher.js"
 		]
 	},

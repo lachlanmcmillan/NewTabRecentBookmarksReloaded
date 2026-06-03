@@ -1,10 +1,5 @@
-// Firefox doesn't support favicon urls (https://bugzilla.mozilla.org/show_bug.cgi?id=1315616)
-// Chrome does support favicon urls (https://developer.chrome.com/docs/extensions/mv3/favicon/).
-// Chrome doesn't return promises, and requires a callback parameter.
-// Chrome also doesn't support 'bookmark.type'
-var browserAPI = chrome
-var isFirefox = typeof browser !== 'undefined'
-var isChrome = typeof browser === 'undefined'
+// browserAPI, isFirefox, isChrome, detectBookmark, detectFolder, getFaviconURL
+// are provided by browser-adapter.js
 
 var useSvgIcons = true
 var pageLoaded = false
@@ -133,30 +128,7 @@ function canModifyGroup(groupId) {
 	return groupId != 'search' && groupId != 'recent'
 }
 
-// Chrome does not set bookmark.type
-function detectBookmark(bookmark) {
-	return (typeof bookmark.type !== 'undefined'
-		? bookmark.type === 'bookmark' // Firefox
-		: typeof bookmark.dateGroupModified === 'undefined' // Chrome
-	)
-}
-function detectFolder(bookmark) {
-	return (typeof bookmark.type !== 'undefined'
-		? bookmark.type === 'folder' // Firefox
-		: typeof bookmark.dateGroupModified !== 'undefined' // Chrome
-	)
-}
-
-function getFaviconURL(url) {
-	//--- Chrome Manifest v2
-	// return 'chrome://favicon/' + encodeURI(url)
-	//--- Chrome Manifest v3
-	// https://developer.chrome.com/docs/extensions/mv3/favicon/
-	const faviconUrl = new URL(chrome.runtime.getURL('/_favicon/'))
-	faviconUrl.searchParams.set('pageUrl', url)
-	faviconUrl.searchParams.set('size', '32')
-	return faviconUrl.toString()
-}
+// detectBookmark, detectFolder, getFaviconURL provided by browser-adapter.js
 function updatePlaceIcon(icon, bookmark, entryLink) {
 	icon.className = 'place-icon icon'
 	if (detectBookmark(bookmark)) {
@@ -633,7 +605,7 @@ function onStorageChange(changes, area) {
 }
 
 function loadConfig() {
-	chrome.storage.local.get(configDefaults, function(items) {
+	browserAPI.storage.local.get(configDefaults, function(items) {
 		config = items
 	})
 }
@@ -697,13 +669,8 @@ function bindSearchInput() {
 }
 
 function getAllFolders_visitNode(folderList, bookmark) {
-	var isChromeRoot = bookmark.id === '0' // Chrome root doesn't have dateGroupModified
-	var isFolder = (typeof bookmark.type !== 'undefined'
-		? bookmark.type === 'folder' // Firefox
-		: typeof bookmark.dateGroupModified !== 'undefined' // Chrome
-	)
-	// console.log(bookmark.title, isFolder)
-	if (isFolder || isChromeRoot) {
+	var isChromeRoot = bookmark.id === '0'
+	if (detectFolder(bookmark) || isChromeRoot) {
 		if (bookmark.id != 'root________'
 			&& bookmark.id != 'mobile______'
 			&& !isChromeRoot
@@ -902,10 +869,10 @@ function bindBookmarkEvents() {
 // https://github.com/mozilla/gecko-dev/blob/master/browser/base/content/contentTheme.js
 const prefersDarkQuery = window.matchMedia("(prefers-color-scheme: dark)")
 function updateTheme() {
-	if (!isFirefox) {
+	if (!browserAPI.theme) {
 		return
 	}
-	browser.theme.getCurrent().then(function(theme){
+	browserAPI.theme.getCurrent().then(function(theme){
 		var isDarkMode = prefersDarkQuery.matches
 		document.body.setAttribute("lwt-newtab", "true")
 		document.body.toggleAttribute("lwt-newtab-brighttext", isDarkMode)

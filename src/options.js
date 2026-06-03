@@ -9,7 +9,7 @@ function restoreOptions() {
 		var defaultValue = configDefaults[configKey]
 		var keyDefaults = {}
 		keyDefaults[configKey] = defaultValue
-		chrome.storage.local.get(keyDefaults, function(items){
+		browserAPI.storage.local.get(keyDefaults, function(items){
 			var configValue = items[configKey]
 			input.checked = configValue
 		})
@@ -22,7 +22,7 @@ function onOptionCheckboxChanged(event) {
 	var newValue = input.checked
 	var keyValues = {}
 	keyValues[configKey] = newValue
-	chrome.storage.local.set(keyValues, function(){})
+	browserAPI.storage.local.set(keyValues, function(){})
 }
 
 function bindOptionInputs() {
