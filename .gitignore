@@ -1,3 +1,4 @@
 *.crx
 *.xpi
 *.zip
+node_modules/
