@@ -15,3 +15,9 @@ if (faviconIdx !== -1) manifest.permissions.splice(faviconIdx, 1);
 if (!manifest.permissions.includes("tabs")) manifest.permissions.push("tabs");
 
 fs.writeFileSync("./dist/manifest.json", JSON.stringify(manifest, null, "\t"));
+
+const { execSync } = require("child_process");
+const xpi = `new-tab-recent-bookmarks-${manifest.version}.xpi`;
+fs.rmSync(`./dist/${xpi}`, { force: true });
+execSync(`zip -r -X ${xpi} . -x '.*' '*.xpi'`, { cwd: "./dist", stdio: "inherit" });
+console.log(`Packaged dist/${xpi}`);

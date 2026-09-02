@@ -6,6 +6,7 @@ export default defineConfig({
   root: 'src',
   base: './',
   esbuild: {
+    jsx: 'transform',
     jsxFactory: 'h',
     jsxFragment: 'Fragment',
     jsxInject: `import { h, Fragment } from 'preact'`,
