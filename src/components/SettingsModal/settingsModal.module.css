@@ -9,6 +9,16 @@
   color: var(--newtab-text-secondary-color);
 }
 
+.group + .heading {
+  margin-top: 20px;
+}
+
+.sectionDescription {
+  margin: -6px 0 8px;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
 .group {
   margin-bottom: 16px;
 }
@@ -20,14 +30,38 @@
   cursor: pointer;
 }
 
+.labelText {
+  flex: 1;
+}
+
 .checkbox {
   margin: 0 8px 0 0;
   width: 16px;
   height: 16px;
 }
 
+.number {
+  width: 72px;
+  padding: 4px 6px;
+  font: inherit;
+  color: inherit;
+  background: var(--newtab-textbox-background-color);
+  border: 1px solid var(--newtab-textbox-border);
+  border-radius: 4px;
+}
+
+.number:focus {
+  outline: none;
+  border-color: var(--newtab-textbox-focus-color);
+  box-shadow: 0 0 0 1px var(--newtab-textbox-focus-color);
+}
+
 .description {
   margin: 4px 0 0 24px;
   font-size: 13px;
   opacity: 0.75;
+}
+
+.numberGroup .description {
+  margin-left: 0;
 }

@@ -1,0 +1,48 @@
+.list {
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid var(--newtab-border-secondary-color);
+  border-radius: 4px;
+  padding: 4px 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.row:hover {
+  background: var(--newtab-button-hover-background);
+}
+
+.checkbox {
+  flex: none;
+  margin: 0 8px 0 0;
+  width: 16px;
+  height: 16px;
+}
+
+.icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  background: url(../../icons/folder.svg) center / contain no-repeat;
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message {
+  margin: 4px 8px;
+  font-size: 13px;
+  opacity: 0.75;
+}

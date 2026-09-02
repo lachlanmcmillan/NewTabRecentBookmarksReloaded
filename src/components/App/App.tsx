@@ -5,7 +5,7 @@ import {
   type Bookmark,
   type StorageChanges,
 } from '../../browser-adapter';
-import { configDefaults, type Config } from '../../config';
+import { configDefaults, normalizeConfig, type Config } from '../../config';
 import { updateConfig, updatePinnedFolders } from '../../state';
 import { KanbanGroup } from '../KanbanGroup/KanbanGroup';
 import { EditBookmarkModal } from '../EditBookmarkModal/EditBookmarkModal';
@@ -32,7 +32,6 @@ interface AppState {
   pageLoaded: boolean;
 }
 
-const RECENT_COUNT = 36;
 const SEARCH_DEBOUNCE_MS = 600;
 
 function debounce<A extends unknown[]>(
@@ -90,10 +89,14 @@ export class App extends Component<{}, AppState> {
   }
 
   async componentDidMount() {
-    const cfg = await browserAPI.storage.local.get(configDefaults);
+    const cfg = normalizeConfig(
+      await browserAPI.storage.local.get(configDefaults)
+    );
     updateConfig(cfg);
 
-    const recent = await browserAPI.bookmarks.getRecent(RECENT_COUNT);
+    const recent = await browserAPI.bookmarks.getRecent(
+      cfg.recentBookmarksCount
+    );
     if (!cfg.recentBookmarksReversed) recent.reverse();
 
     const stored = await browserAPI.storage.local.get({
@@ -152,7 +155,9 @@ export class App extends Component<{}, AppState> {
 
   refreshAll = async () => {
     const cfg = this.state.config;
-    const recent = await browserAPI.bookmarks.getRecent(RECENT_COUNT);
+    const recent = await browserAPI.bookmarks.getRecent(
+      cfg.recentBookmarksCount
+    );
     if (!cfg.recentBookmarksReversed) recent.reverse();
 
     const stored = await browserAPI.storage.local.get({
@@ -179,12 +184,13 @@ export class App extends Component<{}, AppState> {
       return;
     }
     const configKeys = Object.keys(configDefaults) as (keyof Config)[];
-    const changedKey = configKeys.find(key => key in changes);
-    if (!changedKey) return;
-    const cfg: Config = {
-      ...this.state.config,
-      [changedKey]: Boolean(changes[changedKey].newValue),
-    };
+    const changedKeys = configKeys.filter(key => key in changes);
+    if (changedKeys.length === 0) return;
+    const raw: Partial<Config> = { ...this.state.config };
+    for (const key of changedKeys) {
+      (raw as Record<string, unknown>)[key] = changes[key].newValue;
+    }
+    const cfg = normalizeConfig(raw);
     updateConfig(cfg);
     this.setState({ config: cfg }, () => this.refreshAll());
   };
