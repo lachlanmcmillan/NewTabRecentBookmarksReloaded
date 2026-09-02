@@ -310,10 +310,12 @@ export class App extends Component<{}, AppState> {
       editingBookmarkId,
       settingsOpen,
       pageLoaded,
+      config,
     } = state;
     const groupProps = {
       pinnedFolders: pinnedFolders,
       favicons: favicons,
+      showDefaultFavicon: config.showDefaultFavicon,
       onTogglePin: this.togglePinnedFolder,
       onEditBookmark: this.showEditBookmark,
     };

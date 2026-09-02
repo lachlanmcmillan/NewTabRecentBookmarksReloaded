@@ -15,6 +15,8 @@ export interface PlaceEntryProps {
   pinnedFolders: string[];
   /** Cached favicon URL per hostname (Firefox only). */
   favicons: Record<string, string>;
+  /** Show a globe placeholder where a bookmark has no favicon. */
+  showDefaultFavicon: boolean;
   /** Folders are only listed in search results. */
   showFolders?: boolean;
   onEditBookmark: (bookmarkId: string) => void;
@@ -31,6 +33,7 @@ export class PlaceEntry extends Component<PlaceEntryProps> {
     bookmark,
     pinnedFolders,
     favicons,
+    showDefaultFavicon,
     showFolders,
     onEditBookmark,
     onTogglePin,
@@ -41,8 +44,8 @@ export class PlaceEntry extends Component<PlaceEntryProps> {
     if (isFolder && !showFolders) return null;
 
     const iconStyle: { backgroundImage?: string } = {};
-    /** Bookmarks with no cached favicon get an inline globe glyph. */
-    let showDefaultFavicon = false;
+    /** Bookmarks with no cached favicon get an inline globe glyph (if enabled). */
+    let missingFavicon = false;
 
     if (isBookmark && bookmark.url) {
       let favIconUrl: string | null = null;
@@ -56,14 +59,15 @@ export class PlaceEntry extends Component<PlaceEntryProps> {
       if (favIconUrl) {
         iconStyle.backgroundImage = 'url(' + favIconUrl + ')';
       } else {
-        showDefaultFavicon = true;
+        missingFavicon = true;
       }
     }
 
+    const showGlobe = missingFavicon && showDefaultFavicon;
     const iconClass = cx(
       styles.icon,
       isFolder && styles.folderIcon,
-      showDefaultFavicon && styles.defaultFavicon,
+      showGlobe && styles.defaultFavicon,
     );
     const isPinned = isFolder && pinnedFolders.indexOf(bookmark.id) >= 0;
 
@@ -79,7 +83,7 @@ export class PlaceEntry extends Component<PlaceEntryProps> {
           }
         >
           <span class={iconClass} style={iconStyle}>
-            {showDefaultFavicon && <SvgIcon name="icon-globe" />}
+            {showGlobe && <SvgIcon name="icon-globe" />}
           </span>
           <span class={styles.title}>{bookmark.title}</span>
         </a>

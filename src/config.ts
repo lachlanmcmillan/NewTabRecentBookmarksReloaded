@@ -4,12 +4,15 @@ export type Config = {
   bookmarkFoldersReversed: boolean;
   /** How many bookmarks to show in the "Recent" group. */
   recentBookmarksCount: number;
+  /** Show a globe placeholder for bookmarks with no favicon; off leaves a blank slot. */
+  showDefaultFavicon: boolean;
 };
 
 export const configDefaults: Config = {
   recentBookmarksReversed: true,
   bookmarkFoldersReversed: false,
   recentBookmarksCount: 36,
+  showDefaultFavicon: true,
 };
 
 export const RECENT_BOOKMARKS_MIN = 1;
@@ -36,6 +39,9 @@ export function normalizeConfig(raw: Partial<Config>): Config {
     ),
     recentBookmarksCount: clampRecentBookmarksCount(
       raw.recentBookmarksCount ?? configDefaults.recentBookmarksCount
+    ),
+    showDefaultFavicon: Boolean(
+      raw.showDefaultFavicon ?? configDefaults.showDefaultFavicon
     ),
   };
 }

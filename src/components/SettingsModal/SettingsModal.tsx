@@ -28,11 +28,22 @@ type BooleanConfigKey = {
   [K in keyof Config]: Config[K] extends boolean ? K : never;
 }[keyof Config];
 
-const SORTING_SETTINGS: {
+type BooleanSetting = {
   key: BooleanConfigKey;
   label: string;
   description: string;
-}[] = [
+};
+
+const APPEARANCE_SETTINGS: BooleanSetting[] = [
+  {
+    key: 'showDefaultFavicon',
+    label: 'Show default favicon',
+    description:
+      'Show a globe icon for bookmarks without a favicon. When off, the space is left empty.',
+  },
+];
+
+const SORTING_SETTINGS: BooleanSetting[] = [
   {
     key: 'recentBookmarksReversed',
     label: 'Newest recent bookmark first',
@@ -119,6 +130,23 @@ export class SettingsModal extends Component<
     browserAPI.storage.local.set({ recentBookmarksCount: count });
   };
 
+  renderToggles(settings: BooleanSetting[], config: Config) {
+    return settings.map(s => (
+      <div class={styles.group} key={s.key}>
+        <label class={styles.label}>
+          <input
+            class={styles.checkbox}
+            type="checkbox"
+            checked={config[s.key]}
+            onChange={e => this.onToggle(s.key, e.currentTarget.checked)}
+          />
+          <span>{s.label}</span>
+        </label>
+        <p class={styles.description}>{s.description}</p>
+      </div>
+    ));
+  }
+
   render(
     { onClose }: SettingsModalProps,
     { config, countDraft, pinnedFolders }: SettingsModalState
@@ -167,23 +195,11 @@ export class SettingsModal extends Component<
               />
             </div>
 
+            <h4 class={styles.heading}>Appearance</h4>
+            {this.renderToggles(APPEARANCE_SETTINGS, config)}
+
             <h4 class={styles.heading}>Sorting</h4>
-            {SORTING_SETTINGS.map(s => (
-              <div class={styles.group} key={s.key}>
-                <label class={styles.label}>
-                  <input
-                    class={styles.checkbox}
-                    type="checkbox"
-                    checked={config[s.key]}
-                    onChange={e =>
-                      this.onToggle(s.key, e.currentTarget.checked)
-                    }
-                  />
-                  <span>{s.label}</span>
-                </label>
-                <p class={styles.description}>{s.description}</p>
-              </div>
-            ))}
+            {this.renderToggles(SORTING_SETTINGS, config)}
           </ModalBody>
           <ModalActions>
             <ModalButton variant="primary" type="submit">

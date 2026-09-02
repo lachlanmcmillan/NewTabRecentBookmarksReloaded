@@ -38,6 +38,9 @@
 /* Muted grey so the placeholder globe sits back from real favicons. */
 .defaultFavicon {
   color: #777;
+  /* Inset the globe so its outer circle sits clear of the 20px slot edges. */
+  box-sizing: border-box;
+  padding: 2px;
 }
 
 .title {

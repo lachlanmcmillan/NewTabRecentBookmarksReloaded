@@ -73,6 +73,14 @@ export class OptionsApp extends Component<{}, OptionsAppState> {
           onInput={this.onCountInput}
           onChange={this.onCountChange}
         />
+        <h3>Appearance</h3>
+        <OptionCheckbox
+          configKey="showDefaultFavicon"
+          label="Show default favicon"
+          description="Show a globe icon for bookmarks without a favicon. When off, the space is left empty."
+          checked={config.showDefaultFavicon}
+          onChange={this.onToggle}
+        />
         <h3>Sorting</h3>
         <OptionCheckbox
           configKey="recentBookmarksReversed"

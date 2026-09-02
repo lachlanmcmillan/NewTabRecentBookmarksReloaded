@@ -14,6 +14,8 @@ export interface BookmarkGroupProps {
   showFolders?: boolean;
   pinnedFolders: string[];
   favicons: Record<string, string>;
+  /** Show a globe placeholder where a bookmark has no favicon. */
+  showDefaultFavicon: boolean;
   onTogglePin: (folderId: string) => void;
   onMoveLeft?: () => void;
   onMoveRight?: () => void;
@@ -30,6 +32,7 @@ export class BookmarkGroup extends Component<BookmarkGroupProps> {
     showFolders,
     pinnedFolders,
     favicons,
+    showDefaultFavicon,
     onTogglePin,
     onMoveLeft,
     onMoveRight,
@@ -71,6 +74,7 @@ export class BookmarkGroup extends Component<BookmarkGroupProps> {
               bookmark={bookmark}
               pinnedFolders={pinnedFolders}
               favicons={favicons}
+              showDefaultFavicon={showDefaultFavicon}
               showFolders={showFolders}
               onEditBookmark={onEditBookmark}
               onTogglePin={onTogglePin}
