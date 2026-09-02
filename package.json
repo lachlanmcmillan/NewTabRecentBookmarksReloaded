@@ -6,7 +6,9 @@
     "watch": "vite build --watch",
     "typecheck": "tsc --noEmit",
     "lint:firefox": "npm run build:firefox && web-ext lint --source-dir dist",
-    "sign:firefox": "npm run build:firefox && node --env-file-if-exists=.env node_modules/web-ext/bin/web-ext.js sign --source-dir dist --artifacts-dir web-ext-artifacts --channel listed",
+    "source:firefox": "mkdir -p web-ext-artifacts && git archive --format=zip -o web-ext-artifacts/source.zip HEAD",
+    "sign:firefox": "node --env-file-if-exists=.env node_modules/web-ext/bin/web-ext.js sign --source-dir dist --artifacts-dir web-ext-artifacts --channel listed --amo-metadata amo-metadata.json --upload-source-code web-ext-artifacts/source.zip",
+    "publish:firefox": "npm run lint:firefox && npm run source:firefox && npm run sign:firefox",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,json,md}\""
   },
   "dependencies": {

@@ -1,0 +1,12 @@
+{
+  "summary": {
+    "en-US": "Show pinned folders and recent bookmarks on new tab page."
+  },
+  "categories": {
+    "firefox": ["bookmarks"]
+  },
+  "version": {
+    "license": "MPL-2.0",
+    "approval_notes": "Build from the attached source: `npm ci && npm run build:firefox` (Node 25, npm 11). Output is dist/ and dist/new-tab-recent-bookmarks-<version>.xpi. The UI is Preact + TypeScript bundled with Vite, hence the minified output. The `tabs` permission is used only to cache favicons of visited bookmarks (see faviconcacher.ts)."
+  }
+}
