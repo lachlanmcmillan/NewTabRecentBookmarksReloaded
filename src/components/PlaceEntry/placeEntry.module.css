@@ -32,11 +32,12 @@
   -moz-context-properties: fill;
   fill: currentColor;
 }
-.defaultFavicon {
-  background-image: url(../../icons/defaultFavicon.svg);
-}
 .folderIcon {
   background-image: url(../../icons/folder.svg);
+}
+/* Muted grey so the placeholder globe sits back from real favicons. */
+.defaultFavicon {
+  color: #777;
 }
 
 .title {

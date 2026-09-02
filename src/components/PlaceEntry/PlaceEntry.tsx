@@ -7,6 +7,7 @@ import {
   type Bookmark,
 } from '../../browser-adapter';
 import { IconButton } from '../IconButton/IconButton';
+import { SvgIcon } from '../SvgIcon/SvgIcon';
 import styles from './placeEntry.module.css';
 
 export interface PlaceEntryProps {
@@ -40,7 +41,8 @@ export class PlaceEntry extends Component<PlaceEntryProps> {
     if (isFolder && !showFolders) return null;
 
     const iconStyle: { backgroundImage?: string } = {};
-    let iconClass = cx(styles.icon, isFolder && styles.folderIcon);
+    /** Bookmarks with no cached favicon get an inline globe glyph. */
+    let showDefaultFavicon = false;
 
     if (isBookmark && bookmark.url) {
       let favIconUrl: string | null = null;
@@ -54,10 +56,15 @@ export class PlaceEntry extends Component<PlaceEntryProps> {
       if (favIconUrl) {
         iconStyle.backgroundImage = 'url(' + favIconUrl + ')';
       } else {
-        iconClass = cx(iconClass, styles.defaultFavicon);
+        showDefaultFavicon = true;
       }
     }
 
+    const iconClass = cx(
+      styles.icon,
+      isFolder && styles.folderIcon,
+      showDefaultFavicon && styles.defaultFavicon,
+    );
     const isPinned = isFolder && pinnedFolders.indexOf(bookmark.id) >= 0;
 
     return (
@@ -71,7 +78,9 @@ export class PlaceEntry extends Component<PlaceEntryProps> {
               : bookmark.title
           }
         >
-          <span class={iconClass} style={iconStyle}></span>
+          <span class={iconClass} style={iconStyle}>
+            {showDefaultFavicon && <SvgIcon name="icon-globe" />}
+          </span>
           <span class={styles.title}>{bookmark.title}</span>
         </a>
         {isBookmark && (
