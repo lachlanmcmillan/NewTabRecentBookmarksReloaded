@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- This Source Code Form is subject to the terms of the Mozilla Public
-   - License, v. 2.0. If a copy of the MPL was not distributed with this
-   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<svg width="48" height="48" version="1.1" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
- <g transform="matrix(1.0909 0 0 1.0909 -3.75e-7 .00015342)" fill="#4e9603" stroke-width="2.75">
-  <path d="m38.393 11.776a2.475 2.475 0 0 0-1.9882-1.6747l-8.4232-1.2237-3.7675-7.6229a2.5685 2.5685 0 0 0-4.4138 0l-3.7675 7.6229-8.4233 1.2237a2.4557 2.4557 0 0 0-1.3667 4.1992l6.0967 5.9289-1.4382 8.3709a2.4585 2.4585 0 0 0 3.575 2.5905l7.524-3.9462 7.535 3.9572a2.442 2.442 0 0 0 1.144 0.275 2.475 2.475 0 0 0 1.4465-0.473 2.4557 2.4557 0 0 0 0.97625-2.4035l-1.4355-8.3792 6.105-5.9207a2.4557 2.4557 0 0 0 0.6215-2.5245zm-12.009 6.7374 1.034 6.0197-5.4175-2.8407-5.4038 2.8407 1.034-6.0197-4.378-4.2625 6.05-0.87724 2.6978-5.4752 2.7032 5.4752 6.05 0.87724z"/>
-  <path d="m38.5 44h-33a2.75 2.75 0 0 1-2.75-2.75v-5.5a2.75 2.75 0 0 1 5.5 0v2.75h27.5v-2.75a2.75 2.75 0 0 1 5.5 0v5.5a2.75 2.75 0 0 1-2.75 2.75z"/>
- </g>
+<!-- New Tab Recent Bookmarks Reloaded logo: a closed book with a star on the cover. -->
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <!-- Book silhouette (spine and cover) -->
+  <rect x="6" y="4" width="36" height="40" rx="3.5" fill="#1f3b6e"/>
+  <!-- Front cover, rounded on the outer edge only -->
+  <path d="M13 4h25.5a3.5 3.5 0 0 1 3.5 3.5v33a3.5 3.5 0 0 1-3.5 3.5H13z" fill="#2b5597"/>
+  <!-- Page edges peeking out at the bottom -->
+  <path d="M13 40.5h27v1.5a2 2 0 0 1-2 2H13z" fill="#e9eef7"/>
+  <!-- Star on the cover -->
+  <path d="M27.5 14.5 29.79 20.84 36.54 21.06 31.21 25.21 33.08 31.69 27.5 27.9 21.92 31.69 23.79 25.21 18.46 21.06 25.21 20.84Z" fill="#f5c542" stroke="#f5c542" stroke-width="1" stroke-linejoin="round"/>
 </svg>
