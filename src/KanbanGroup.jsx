@@ -7,20 +7,6 @@ import {
 } from './browser-adapter.js';
 import { SvgIcon } from './icons.jsx';
 
-function hslFromHostname(urlHostname) {
-  var hostname = urlHostname.replace(/^www\./, '');
-  var aCode = 'a'.charCodeAt(0);
-  var zCode = 'z'.charCodeAt(0);
-  var hueRatio =
-    (hostname.toLowerCase().charCodeAt(0) - aCode) / (zCode - aCode);
-  var hue = Math.round(255 * hueRatio);
-  var satRatio =
-    (hostname.toLowerCase().charCodeAt(1) - aCode) / (zCode - aCode);
-  var sat = 60 + Math.round(40 * satRatio);
-  var lig = 10 + Math.round(30 * satRatio);
-  return 'hsl(' + hue + ', ' + sat + '%, ' + lig + '%)';
-}
-
 class PlaceEntry extends Component {
   render({ bookmark, pinnedFolders, onEditBookmark, onTogglePin }) {
     var isBookmark = detectBookmark(bookmark);
@@ -32,13 +18,12 @@ class PlaceEntry extends Component {
     var hostname = '';
 
     if (isBookmark) {
-      iconClasses += ' icon-bookmark-overlay';
+      iconClasses += ' icon-default-favicon';
       if (isChrome) {
         iconStyle.backgroundImage = 'url(' + getFaviconURL(bookmark.url) + ')';
       } else {
         try {
           hostname = new URL(bookmark.url).hostname;
-          iconStyle.backgroundColor = hslFromHostname(hostname);
         } catch (e) {}
       }
     }
@@ -133,7 +118,7 @@ export class KanbanGroup extends Component {
           )}
         </div>
         <div class="place-list">
-          {bookmarks.map((bookmark) => (
+          {bookmarks.map(bookmark => (
             <PlaceEntry
               key={bookmark.id}
               bookmark={bookmark}
