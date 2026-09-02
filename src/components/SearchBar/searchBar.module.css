@@ -1,0 +1,106 @@
+.wrapper {
+  display: flex;
+  padding: 10px;
+}
+
+.padder,
+.settingsButton {
+  width: 48px;
+  height: 48px;
+}
+
+.inner {
+  cursor: default;
+  display: flex;
+  min-height: 48px;
+  margin: 0 auto;
+  position: relative;
+  width: 224px;
+}
+@media (min-width: 610px) {
+  .inner {
+    width: 480px;
+  }
+}
+@media (min-width: 866px) {
+  .inner {
+    width: 736px;
+  }
+}
+
+.input {
+  background: var(--newtab-textbox-background-color);
+  border: solid 1px var(--newtab-search-border-color);
+  box-shadow:
+    0 1px 4px 0 rgba(12, 12, 13, 0.2),
+    0 0 0 1px rgba(0, 0, 0, 0.15);
+  font-size: 15px;
+  padding: 0;
+  padding-inline-end: 48px;
+  padding-inline-start: 46px;
+  width: 100%;
+}
+.wrapper:hover .input {
+  box-shadow:
+    0 1px 4px 0 rgba(12, 12, 13, 0.2),
+    0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.inner:active .input,
+.input:focus {
+  border: 1px solid var(--newtab-textbox-focus-color);
+  box-shadow: var(--newtab-textbox-focus-boxshadow);
+}
+
+.bookmarkIcon {
+  fill: var(--newtab-search-icon-color);
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 13px;
+  top: 12px;
+  pointer-events: none;
+}
+
+.searchButton {
+  background: url(../../icons/forward.svg) no-repeat center center;
+  background-size: 16px 16px;
+  border: 0;
+  border-radius: 0 3px 3px 0;
+  -moz-context-properties: fill;
+  fill: var(--newtab-search-icon-color);
+  height: 100%;
+  inset-inline-end: 0;
+  position: absolute;
+  width: 48px;
+}
+.searchButton:focus,
+.searchButton:hover {
+  background-color: rgba(12, 12, 13, 0.1);
+  cursor: pointer;
+}
+.searchButton:active {
+  background-color: rgba(12, 12, 13, 0.2);
+}
+.searchButton:dir(rtl) {
+  transform: scaleX(-1);
+}
+
+.settingsButton {
+  background: url(../../icons/settings.svg) no-repeat center center;
+  background-size: 16px 16px;
+  border: 0;
+  border-radius: 3px;
+}
+.settingsButton:focus,
+.settingsButton:hover {
+  background-color: rgba(12, 12, 13, 0.1);
+  cursor: pointer;
+}
+
+:global(body[lwt-newtab-brighttext]) .searchButton,
+:global(body[lwt-newtab-brighttext]) .settingsButton {
+  filter: invert(1);
+}
+:global(body[lwt-newtab-brighttext]) .bookmarkIcon {
+  filter: invert(1) brightness(0.65);
+}

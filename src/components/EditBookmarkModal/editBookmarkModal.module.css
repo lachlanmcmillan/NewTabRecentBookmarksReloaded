@@ -1,0 +1,66 @@
+.form {
+  position: relative;
+}
+
+.deleteButton {
+  position: absolute;
+  right: 25px;
+  top: 15px;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+}
+
+.field {
+  position: relative;
+}
+
+.input,
+.select {
+  background-color: var(--newtab-textbox-background-color);
+  border: 1px solid var(--newtab-textbox-border);
+  margin: 8px 0;
+  height: 32px;
+  width: 100%;
+  font-size: 15px;
+  color: inherit;
+}
+.input {
+  padding: 0 8px;
+}
+.urlInput {
+  padding-inline-end: 32px;
+}
+
+.select {
+  appearance: none;
+  padding: 0 32px;
+  background-image:
+    url(../../icons/folder.svg), url(../../icons/arrow-dropdown-12.svg);
+  background-position:
+    10px center,
+    calc(100% - 10px) center;
+  background-repeat: no-repeat;
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+.clearButton {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 8px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--newtab-icon-secondary-color);
+  cursor: pointer;
+}
+.clearButton:hover,
+.clearButton:focus {
+  color: var(--newtab-text-primary-color);
+}

@@ -22,6 +22,7 @@ Install dependencies with `npm install`, then:
 - `npm run build:firefox` builds the extension into `dist/` and packages it as `dist/new-tab-recent-bookmarks-<version>.xpi`.
 - `npm run build:chrome` builds the extension into `dist/` with a Chrome manifest.
 - `npm run watch` rebuilds `dist/` on every change.
+- `npm run typecheck` runs the TypeScript compiler without emitting. The build scripts run it first.
 
 For development, load `dist/manifest.json` as a temporary add-on from `about:debugging#/runtime/this-firefox`, or load `dist/` as an unpacked extension in Chrome.
 

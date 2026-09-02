@@ -1,0 +1,95 @@
+/* Reset, theme variables and base typography shared by the new tab page.
+   Everything component-specific lives in a *.module.css next to its component. */
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+*::-moz-focus-inner {
+  border: 0;
+}
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--newtab-background-color);
+  color: var(--newtab-text-primary-color);
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Ubuntu', 'Helvetica Neue',
+    sans-serif;
+  font-size: 16px;
+}
+button,
+input {
+  background-color: inherit;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+h1,
+h2 {
+  font-weight: normal;
+}
+a {
+  text-decoration: none;
+}
+input[type='text'],
+input[type='search'] {
+  border-radius: 3px;
+}
+
+/* Theme variables (light). Names follow Firefox's activity-stream palette. */
+body {
+  --newtab-background-color: #f9f9fa;
+  --newtab-border-primary-color: #b1b1b3;
+  --newtab-border-secondary-color: #d7d7db;
+  --newtab-icon-primary-color: rgba(12, 12, 13, 0.8);
+  --newtab-icon-secondary-color: rgba(12, 12, 13, 0.6);
+  --newtab-text-primary-color: #0c0c0d;
+  --newtab-text-secondary-color: #737373;
+  --newtab-textbox-background-color: #fff;
+  --newtab-textbox-border: rgba(12, 12, 13, 0.2);
+  --newtab-textbox-focus-color: #0060df;
+  --newtab-textbox-focus-boxshadow:
+    0 0 0 1px #0060df, 0 0 0 4px rgba(0, 96, 223, 0.3);
+  --newtab-button-primary-color: #0060df;
+  --newtab-button-secondary-color: inherit;
+  --newtab-button-hover-background: #cccccc;
+  --newtab-modal-color: #fff;
+  --newtab-overlay-color: rgba(237, 237, 240, 0.8);
+  --newtab-search-border-color: transparent;
+  --newtab-search-icon-color: rgba(12, 12, 13, 0.4);
+  --newtab-card-active-outline-color: #d7d7db;
+}
+
+/* Theme variables (dark). The attribute is set by the app from prefers-color-scheme. */
+body[lwt-newtab-brighttext] {
+  --newtab-background-color: #2a2a2e;
+  --newtab-border-primary-color: rgba(249, 249, 250, 0.8);
+  --newtab-border-secondary-color: rgba(249, 249, 250, 0.1);
+  --newtab-icon-primary-color: rgba(249, 249, 250, 0.8);
+  --newtab-icon-secondary-color: rgba(249, 249, 250, 0.4);
+  --newtab-text-primary-color: #f9f9fa;
+  --newtab-text-secondary-color: rgba(249, 249, 250, 0.8);
+  --newtab-textbox-background-color: #38383d;
+  --newtab-textbox-border: rgba(249, 249, 250, 0.2);
+  --newtab-textbox-focus-color: #45a1ff;
+  --newtab-textbox-focus-boxshadow:
+    0 0 0 1px #45a1ff, 0 0 0 4px rgba(69, 161, 255, 0.3);
+  --newtab-button-primary-color: #0060df;
+  --newtab-button-secondary-color: #38383d;
+  --newtab-button-hover-background: #444444;
+  --newtab-modal-color: #2a2a2e;
+  --newtab-overlay-color: rgba(12, 12, 13, 0.8);
+  --newtab-search-border-color: rgba(249, 249, 250, 0.2);
+  --newtab-search-icon-color: #444444;
+  --newtab-card-active-outline-color: #4a4a4f;
+}

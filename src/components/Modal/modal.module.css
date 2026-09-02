@@ -1,0 +1,55 @@
+.overlay {
+  background: var(--newtab-overlay-color);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  overflow: auto;
+  z-index: 1100;
+}
+
+.dialog {
+  background: var(--newtab-modal-color);
+  border: 1px solid var(--newtab-border-secondary-color);
+  border-radius: 5px;
+  box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.2);
+  font-size: 15px;
+  position: fixed;
+  top: 40px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-height: calc(100% - 40px);
+  overflow: auto;
+  width: 274px;
+  z-index: 1102;
+}
+@media (min-width: 610px) {
+  .dialog {
+    width: 530px;
+  }
+}
+@media (min-width: 866px) {
+  .dialog {
+    width: 786px;
+  }
+}
+
+.title {
+  font-size: 16px;
+  margin: 0 0 16px;
+}
+
+.body {
+  max-width: 492px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.actions {
+  border-top: 1px solid var(--newtab-border-secondary-color);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 15px 25px 0;
+}

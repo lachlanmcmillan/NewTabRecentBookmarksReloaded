@@ -1,0 +1,10 @@
+.dragging {
+  opacity: 0.5;
+}
+
+.draghover {
+  background: linear-gradient(
+    var(--newtab-textbox-focus-color),
+    transparent 1px
+  );
+}

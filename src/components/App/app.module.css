@@ -1,0 +1,15 @@
+.kanban {
+  width: 100%;
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: safe center;
+  overflow-x: auto;
+  row-gap: 20px;
+}
+
+/* display: none would stop favicons from loading, so hide with opacity. */
+.loading {
+  opacity: 0;
+}

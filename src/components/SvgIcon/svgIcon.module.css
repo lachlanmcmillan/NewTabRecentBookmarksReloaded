@@ -1,0 +1,7 @@
+/* Inline 16x16 glyph that fills its container and takes the text colour. */
+.icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}

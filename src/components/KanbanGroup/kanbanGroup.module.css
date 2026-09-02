@@ -1,0 +1,37 @@
+.group {
+  width: 320px;
+  max-width: 320px;
+  padding: 0 5px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.label {
+  margin: 0.2rem 0;
+}
+.label[draggable] {
+  cursor: grab;
+}
+
+/* Heading buttons appear when the heading is hovered. */
+.headingButton {
+  margin-left: 4px;
+  opacity: 0;
+  transform: scale(0.25);
+  transition-duration: 150ms;
+  transition-property: transform, opacity;
+}
+.heading:hover .headingButton {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.placeList {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}

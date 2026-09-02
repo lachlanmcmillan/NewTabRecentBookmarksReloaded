@@ -1,18 +1,22 @@
 {
   "private": true,
   "scripts": {
-    "build:firefox": "vite build && node preparebuild_firefox.js",
-    "build:chrome": "vite build && node preparebuild_chrome.js",
+    "build:firefox": "tsc --noEmit && vite build && node preparebuild_firefox.js",
+    "build:chrome": "tsc --noEmit && vite build && node preparebuild_chrome.js",
     "watch": "vite build --watch",
-    "format": "prettier --write \"src/**/*.{js,json,md}\"",
+    "typecheck": "tsc --noEmit",
     "lint:firefox": "npm run build:firefox && web-ext lint --source-dir dist",
-    "sign:firefox": "npm run build:firefox && node --env-file-if-exists=.env node_modules/web-ext/bin/web-ext.js sign --source-dir dist --artifacts-dir web-ext-artifacts --channel listed"
+    "sign:firefox": "npm run build:firefox && node --env-file-if-exists=.env node_modules/web-ext/bin/web-ext.js sign --source-dir dist --artifacts-dir web-ext-artifacts --channel listed",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,json,md}\""
   },
   "dependencies": {
     "preact": "^10.29.2"
   },
   "devDependencies": {
+    "@types/chrome": "^0.2.8",
+    "@types/firefox-webext-browser": "^143.0.0",
     "prettier": "^3.8.3",
+    "typescript": "^7.0.2",
     "vite": "^8.0.16",
     "web-ext": "^10.6.0"
   }

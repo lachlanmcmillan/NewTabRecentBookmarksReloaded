@@ -1,0 +1,27 @@
+.button {
+  background-color: var(--newtab-button-secondary-color);
+  border: 1px solid var(--newtab-border-primary-color);
+  border-radius: 4px;
+  color: inherit;
+  cursor: pointer;
+  margin-bottom: 15px;
+  margin-inline-start: 10px;
+  padding: 10px 30px;
+  white-space: nowrap;
+}
+.button:hover,
+.button:focus {
+  box-shadow: 0 0 0 5px var(--newtab-card-active-outline-color);
+  transition: box-shadow 150ms;
+}
+.primary {
+  background-color: var(--newtab-button-primary-color);
+  border-color: var(--newtab-button-primary-color);
+  color: #fff;
+}
+.danger {
+  --newtab-button-danger-color: #dc3545;
+  background-color: var(--newtab-button-danger-color);
+  border-color: var(--newtab-button-danger-color);
+  color: #fff;
+}

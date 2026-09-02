@@ -6,10 +6,8 @@ export default defineConfig({
   root: 'src',
   base: './',
   esbuild: {
-    jsx: 'transform',
-    jsxFactory: 'h',
-    jsxFragment: 'Fragment',
-    jsxInject: `import { h, Fragment } from 'preact'`,
+    jsx: 'automatic',
+    jsxImportSource: 'preact',
   },
   plugins: [
     {
@@ -31,7 +29,7 @@ export default defineConfig({
       input: {
         newtab: resolve(__dirname, 'src/newtab.html'),
         options: resolve(__dirname, 'src/options.html'),
-        faviconcacher: resolve(__dirname, 'src/faviconcacher.js'),
+        faviconcacher: resolve(__dirname, 'src/faviconcacher.ts'),
       },
       output: {
         entryFileNames: '[name].js',
