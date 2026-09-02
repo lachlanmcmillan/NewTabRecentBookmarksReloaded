@@ -7,7 +7,7 @@ import {
 } from '../../browser-adapter';
 import { configDefaults, normalizeConfig, type Config } from '../../config';
 import { updateConfig, updatePinnedFolders } from '../../state';
-import { KanbanGroup } from '../KanbanGroup/KanbanGroup';
+import { BookmarkGroup } from '../BookmarkGroup/BookmarkGroup';
 import { EditBookmarkModal } from '../EditBookmarkModal/EditBookmarkModal';
 import { SettingsModal } from '../SettingsModal/SettingsModal';
 import { SearchBar, SEARCH_INPUT_ID } from '../SearchBar/SearchBar';
@@ -33,8 +33,7 @@ interface AppState {
   pageLoaded: boolean;
 }
 
-const SEARCH_DEBOUNCE_MS = 600;
-/** Kanban width (px) → number of columns. Columns are 320px plus a 20px gutter, page padding 40px. */
+/** Bookmark width (px) → number of columns. Columns are 320px plus a 20px gutter, page padding 40px. */
 const COLUMN_BREAKPOINTS: Record<number, number> = {
   0: 1,
   700: 2,
@@ -43,17 +42,6 @@ const COLUMN_BREAKPOINTS: Record<number, number> = {
   1720: 5,
   2060: 6,
 };
-
-function debounce<A extends unknown[]>(
-  func: (...args: A) => void,
-  wait: number
-): (...args: A) => void {
-  let timeout: ReturnType<typeof setTimeout> | undefined;
-  return function (...args: A) {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-}
 
 /** GitHub's favicon is a dark glyph on transparent; flip it for dark mode. */
 function fixDarkFavIcon(hostname: string, favIconUrl: string): string {
@@ -78,10 +66,8 @@ const prefersDarkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
 export class App extends Component<{}, AppState> {
   private fetchedHostnames = new Set<string>();
-  private debouncedSearch = debounce(
-    (query: string) => this.doSearch(query),
-    SEARCH_DEBOUNCE_MS
-  );
+  /** Incremented per search so slow, superseded results are discarded. */
+  private searchSeq = 0;
 
   constructor(props: {}) {
     super(props);
@@ -260,18 +246,15 @@ export class App extends Component<{}, AppState> {
 
   onQueryChange = () => {
     const query = searchInput()?.value ?? '';
-    if (query) {
-      this.debouncedSearch(query);
-    } else {
+    const seq = ++this.searchSeq;
+    if (!query) {
       this.setState({ searchResults: null });
+      return;
     }
-  };
-
-  doSearch(query: string) {
-    browserAPI.bookmarks.search({ query: query }).then(results => {
-      this.setState({ searchResults: results });
+    browserAPI.bookmarks.search({ query }).then(results => {
+      if (seq === this.searchSeq) this.setState({ searchResults: results });
     });
-  }
+  };
 
   openSettings = () => {
     this.setState({ settingsOpen: true });
@@ -347,7 +330,7 @@ export class App extends Component<{}, AppState> {
           gutter="20px"
         >
           {searchResults !== null ? (
-            <KanbanGroup
+            <BookmarkGroup
               key="search"
               groupId="search"
               title="Search"
@@ -358,7 +341,7 @@ export class App extends Component<{}, AppState> {
           ) : (
             // A flat array, not a Fragment: Masonry needs each group as its own child.
             [
-              <KanbanGroup
+              <BookmarkGroup
                 key="recent"
                 groupId="recent"
                 title="Recent"
@@ -369,7 +352,7 @@ export class App extends Component<{}, AppState> {
                 const group = folderGroups[folderId];
                 if (!group) return null;
                 return (
-                  <KanbanGroup
+                  <BookmarkGroup
                     key={folderId}
                     groupId={folderId}
                     title={group.title}

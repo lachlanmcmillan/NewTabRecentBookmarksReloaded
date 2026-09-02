@@ -24,7 +24,7 @@ function cx(...names: (string | false | undefined)[]): string {
   return names.filter(Boolean).join(' ');
 }
 
-/** One row in a kanban column: a bookmark link or a folder. */
+/** One row in a bookmark group: a bookmark link or a folder. */
 export class PlaceEntry extends Component<PlaceEntryProps> {
   render({
     bookmark,

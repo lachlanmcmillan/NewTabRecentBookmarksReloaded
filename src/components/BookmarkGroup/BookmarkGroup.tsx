@@ -2,9 +2,9 @@ import { Component } from 'preact';
 import type { Bookmark } from '../../browser-adapter';
 import { IconButton } from '../IconButton/IconButton';
 import { PlaceEntry } from '../PlaceEntry/PlaceEntry';
-import styles from './kanbanGroup.module.css';
+import styles from './bookmarkGroup.module.css';
 
-export interface KanbanGroupProps {
+export interface BookmarkGroupProps {
   /** "search", "recent", or a pinned folder's bookmark id. */
   groupId: string;
   title: string;
@@ -21,7 +21,7 @@ export interface KanbanGroupProps {
 }
 
 /** A column of bookmarks with a heading and, when editable, move/unpin buttons. */
-export class KanbanGroup extends Component<KanbanGroupProps> {
+export class BookmarkGroup extends Component<BookmarkGroupProps> {
   render({
     groupId,
     title,
@@ -34,7 +34,7 @@ export class KanbanGroup extends Component<KanbanGroupProps> {
     onMoveLeft,
     onMoveRight,
     onEditBookmark,
-  }: KanbanGroupProps) {
+  }: BookmarkGroupProps) {
     return (
       <div class={styles.group} data-id={groupId}>
         <div class={styles.heading}>

@@ -2,11 +2,11 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
 import { browserAPI } from './browser-adapter';
 import { config, canModifyGroup, insertBeforePinnedFolder } from './state';
-import groupStyles from './components/KanbanGroup/kanbanGroup.module.css';
+import groupStyles from './components/BookmarkGroup/bookmarkGroup.module.css';
 import entryStyles from './components/PlaceEntry/placeEntry.module.css';
 import styles from './drag.module.css';
 
-// Selectors for the elements rendered by KanbanGroup.tsx and PlaceEntry.tsx.
+// Selectors for the elements rendered by BookmarkGroup.tsx and PlaceEntry.tsx.
 const ENTRY = '.' + entryStyles.entry;
 const GROUP = '.' + groupStyles.group;
 const GROUP_HEADING = '.' + groupStyles.heading;
