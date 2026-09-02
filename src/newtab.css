@@ -304,3 +304,34 @@ body[lwt-newtab-brighttext] #open-options-page {
 body[lwt-newtab-brighttext] #search-bookmark-icon {
 	filter: invert(1) brightness(0.65);
 }
+
+
+/* Settings Modal */
+.settings-form .form-input-container {
+	max-width: 420px;
+}
+.settings-form .settings-heading {
+	font-size: 13px;
+	font-weight: 600;
+	margin: 0 0 12px;
+	color: var(--newtab-text-secondary-color, inherit);
+}
+.settings-form .settings-group {
+	margin-bottom: 16px;
+}
+.settings-form .settings-group label {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	cursor: pointer;
+}
+.settings-form .settings-group input[type="checkbox"] {
+	margin: 0 8px 0 0;
+	width: 16px;
+	height: 16px;
+}
+.settings-form .settings-description {
+	margin: 4px 0 0 24px;
+	font-size: 13px;
+	opacity: 0.75;
+}

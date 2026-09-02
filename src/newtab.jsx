@@ -1,12 +1,10 @@
 import { render, Component } from 'preact';
-import {
-  browserAPI,
-  isChrome,
-} from './browser-adapter.js';
+import { browserAPI, isChrome } from './browser-adapter.js';
 import { configDefaults } from './config.js';
 import { updateConfig, updatePinnedFolders } from './state.js';
 import { KanbanGroup } from './KanbanGroup.jsx';
 import { EditBookmarkModal } from './EditBookmarkModal.jsx';
+import { SettingsModal } from './SettingsModal.jsx';
 
 function debounce(func, wait) {
   var timeout;
@@ -88,6 +86,7 @@ class App extends Component {
       folderGroups: {},
       searchResults: null,
       editingBookmarkId: null,
+      settingsOpen: false,
       pageLoaded: false,
     };
     this._fetchedHostnames = new Set();
@@ -139,11 +138,11 @@ class App extends Component {
       var folders = await browserAPI.bookmarks.get(folderIds);
       var groups = {};
       await Promise.all(
-        folders.map(async (folder) => {
+        folders.map(async folder => {
           var children = await browserAPI.bookmarks.getChildren(folder.id);
           if (cfg.bookmarkFoldersReversed) children.reverse();
           groups[folder.id] = { title: folder.title, bookmarks: children };
-        }),
+        })
       );
       return groups;
     } catch (e) {
@@ -172,7 +171,7 @@ class App extends Component {
     });
   };
 
-  onStorageChange = (changes) => {
+  onStorageChange = changes => {
     if (changes.pinnedFolders) {
       this.refreshAll();
     } else if (changes.recentBookmarksReversed) {
@@ -253,16 +252,20 @@ class App extends Component {
   };
 
   doSearch(query) {
-    browserAPI.bookmarks.search({ query: query }).then((results) => {
+    browserAPI.bookmarks.search({ query: query }).then(results => {
       this.setState({ searchResults: results });
     });
   }
 
-  openOptionsPage = () => {
-    browserAPI.runtime.openOptionsPage();
+  openSettings = () => {
+    this.setState({ settingsOpen: true });
   };
 
-  showEditBookmark = (bookmarkId) => {
+  closeSettings = () => {
+    this.setState({ settingsOpen: false });
+  };
+
+  showEditBookmark = bookmarkId => {
     this.setState({ editingBookmarkId: bookmarkId });
   };
 
@@ -271,12 +274,12 @@ class App extends Component {
     this.refreshAll();
   };
 
-  togglePinnedFolder = (folderId) => {
+  togglePinnedFolder = folderId => {
     var pf = this.state.pinnedFolders;
     var wasPinned = pf.indexOf(folderId) >= 0;
     var newPf;
     if (wasPinned) {
-      newPf = pf.filter((id) => id !== folderId);
+      newPf = pf.filter(id => id !== folderId);
     } else {
       newPf = pf.concat([folderId]);
       this.setState({ searchResults: null });
@@ -306,6 +309,7 @@ class App extends Component {
       folderGroups,
       searchResults,
       editingBookmarkId,
+      settingsOpen,
       pageLoaded,
     } = state;
     var searching = searchResults !== null;
@@ -314,7 +318,7 @@ class App extends Component {
       <>
         <SearchBar
           onQueryChange={this.onQueryChange}
-          onSettingsClick={this.openOptionsPage}
+          onSettingsClick={this.openSettings}
         />
         <div
           id="kanban"
@@ -339,7 +343,7 @@ class App extends Component {
             onTogglePin={this.togglePinnedFolder}
             onEditBookmark={this.showEditBookmark}
           />
-          {pinnedFolders.map((folderId) => {
+          {pinnedFolders.map(folderId => {
             var group = folderGroups[folderId];
             if (!group) return null;
             return (
@@ -365,6 +369,7 @@ class App extends Component {
             onClose={this.closeEditBookmark}
           />
         )}
+        {settingsOpen && <SettingsModal onClose={this.closeSettings} />}
       </>
     );
   }
