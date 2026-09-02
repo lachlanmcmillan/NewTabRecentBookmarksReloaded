@@ -4,85 +4,12 @@
 	<title></title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<link rel="icon" type="image/png" href="chrome://branding/content/icon32.png">
-	<!-- <link rel="stylesheet" href="chrome://activity-stream/content/css/activity-stream.css"> -->
 	<link rel="stylesheet" type="text/css" href="newtab-firefox.css">
 	<link rel="stylesheet" type="text/css" href="newtab.css">
 </head>
 <body>
-	<div class="search-wrapper">
-		<div class="search-padder"></div>
-		<div class="search-inner-wrapper">
-			<input id="newtab-search-text" data-l10n-id="newtab-search-box-search-the-web-input" maxlength="256" type="search" autocomplete="off" aria-autocomplete="true" aria-controls="searchSuggestionTable" aria-expanded="false" aria-label="Search the Web" title="Search Bookmarks" placeholder="Search Bookmarks">
-			<svg id="search-bookmark-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-				<path fill="context-fill" fill-opacity="context-fill-opacity" d="M15.845 6.064A1.1 1.1 0 0 0 15 5.331L10.911 4.6 8.985.735a1.1 1.1 0 0 0-1.969 0L5.089 4.6l-4.081.729a1.1 1.1 0 0 0-.615 1.834L3.32 10.31l-.609 4.36a1.1 1.1 0 0 0 1.6 1.127L8 13.873l3.69 1.927a1.1 1.1 0 0 0 1.6-1.127l-.61-4.363 2.926-3.146a1.1 1.1 0 0 0 .239-1.1z"/>
-			</svg>
-			<button id="searchSubmit" class="search-button" data-l10n-id="newtab-search-box-search-button" title="Search" aria-label="Search"></button>
-		</div>
-		<button id="open-options-page"></button>
-	</div>
-	<div id="kanban" loading="true"></div>
-	<div class="edit-bookmark-wrapper edit-topsites-wrapper hidden">
-		<div class="edit-bookmark edit-topsites">
-			<div class="modalOverlayOuter active" role="presentation">
-				<div class="modal">
-					<form class="edit-bookmark-form topsite-form" data-id="">
-						<button class="edit-bookmark-delete danger" type="button">
-							Delete
-						</button>
-						<div class="form-input-container">
-							<h3 class="section-title grey-title">
-								Edit Bookmark
-							</h3>
-							<div class="fields-and-preview">
-								<div class="form-wrapper">
-									<label>
-										<span data-l10n-id="newtab-topsites-title-label">
-											Title
-										</span>
-										<div class="field">
-											<input id="edit-bookmark-title" data-l10n-id="newtab-topsites-title-input" placeholder="Enter a title" type="text" />
-										</div>
-									</label>
-									<label>
-										<span data-l10n-id="newtab-topsites-url-label">
-											URL
-										</span>
-										<div class="field url">
-											<input id="edit-bookmark-url" data-l10n-id="newtab-topsites-url-input" placeholder="Type or paste a URL" type="text">
-												<button class="clear-input-button icon-button-style" type="button">
-												</button>
-											</input>
-										</div>
-									</label>
-									<label>
-										<span data-l10n-id="bookmark-overlay-folder">
-											Folder
-										</span>
-										<div class="field folder">
-											<select id="edit-bookmark-folder">
-												<option value="toolbar_____">Bookmarks Toolbar</option>
-												<option value="menu________">Bookmarks Menu</option>
-												<option value="unfiled_____">Other Bookmarks</option>
-											</select>
-										</div>
-									</label>
-								</div>
-							</div>
-						</div>
-						<section class="actions">
-							<button class="cancel" data-l10n-id="newtab-topsites-cancel-button" type="button">
-								Cancel
-							</button>
-							<button class="done" data-l10n-id="newtab-topsites-save-button" type="submit">
-								Save
-							</button>
-						</section>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script type="module" src="newtab.js"></script>
+	<div id="app"></div>
+	<script type="module" src="newtab.jsx"></script>
 	<script type="module" src="drag.js"></script>
 </body>
 </html>
