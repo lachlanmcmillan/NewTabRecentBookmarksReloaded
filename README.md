@@ -1,9 +1,8 @@
-# NewTab Recent Bookmarks
+# New Tab Recent Bookmarks Reloaded
 
 A simple list of the most recent bookmarks, along with the ability to search for a bookmark folder and pin it. Pinned folders display their bookmarks in the descending chronological order as well.
 
-* **Chrome:** https://chrome.google.com/webstore/detail/new-tab-recent-bookmarks/codfiogcpnbbeidoaffdmmepkbikljib
-* **Firefox:** https://addons.mozilla.org/en-CA/firefox/addon/new-tab-recent-bookmarks/
+- **Firefox:** https://addons.mozilla.org/en-CA/firefox/addon/new-tab-recent-bookmarks/
 
 ![](screenshots/FirefoxWithFavicons.png)
 ![](screenshots/ChromeSearchBookmarkPinFolder.png)
@@ -13,25 +12,21 @@ A simple list of the most recent bookmarks, along with the ability to search for
 
 ## Permissions
 
-* **Chrome:** Favicons are displayed using the favicon cache.
-* **Firefox:** Since firefox doesn't expose the favicon cache, the extension needs to do it manually. By using the `tabs` permission, it can store the favicons when you visit a site. Until you have visited a bookmark, a color will be generated for the website based on the hostname.
-
+- **Chrome:** Favicons are displayed using the favicon cache.
+- **Firefox:** Since firefox doesn't expose the favicon cache, the extension needs to do it manually. By using the `tabs` permission, it can store the favicons when you visit a site. Until you have visited a bookmark, the default globe icon is shown.
 
 ## Develop / Build
 
-Run `sh ./build.sh` to generate a `firefox.xpi` and a `chrome.crx`.
+Install dependencies with `npm install`, then:
 
-You can easily load the `src/` as an unpacked addon in Firefox.
+- `npm run build:firefox` builds the extension into `dist/` and packages it as `dist/new-tab-recent-bookmarks-<version>.xpi`.
+- `npm run build:chrome` builds the extension into `dist/` with a Chrome manifest.
+- `npm run watch` rebuilds `dist/` on every change.
 
-To test in Chrome, you will need to modify the `manifest.json` before loading it as an unpacked extension. First run `python3 preparebuild_chrome.py` to modify the `manifest.json`.
-
-Run `git checkout src/manifest.json` to reset the file before commiting changes with it.
+For development, load `dist/manifest.json` as a temporary add-on from `about:debugging#/runtime/this-firefox`, or load `dist/` as an unpacked extension in Chrome.
 
 ![](screenshots/ChromeWithFavicons.png)
 
 ## Credits
 
-* Icons are from Firefox.  
-  https://github.com/mozilla/gecko-dev/tree/master/browser/themes/shared/icons
-* Used the "edit topsite" HTML+CSS from `about:newtab` for the edit bookmark GUI.
-    * https://github.com/mozilla/gecko-dev/blob/master/browser/components/newtab/css/activity-stream-linux.css
+Forked from https://github.com/zren/NewTabRecentBookmarks.

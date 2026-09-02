@@ -1,17 +1,19 @@
 {
   "private": true,
   "scripts": {
-    "build": "vite build",
     "build:firefox": "vite build && node preparebuild_firefox.js",
     "build:chrome": "vite build && node preparebuild_chrome.js",
     "watch": "vite build --watch",
-    "format": "prettier --write \"src/**/*.{js,json,md}\""
+    "format": "prettier --write \"src/**/*.{js,json,md}\"",
+    "lint:firefox": "npm run build:firefox && web-ext lint --source-dir dist",
+    "sign:firefox": "npm run build:firefox && node --env-file-if-exists=.env node_modules/web-ext/bin/web-ext.js sign --source-dir dist --artifacts-dir web-ext-artifacts --channel listed"
   },
   "dependencies": {
     "preact": "^10.29.2"
   },
   "devDependencies": {
     "prettier": "^3.8.3",
-    "vite": "^8.0.16"
+    "vite": "^8.0.16",
+    "web-ext": "^10.6.0"
   }
 }

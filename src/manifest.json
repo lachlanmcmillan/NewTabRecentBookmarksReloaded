@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "New Tab Recent Bookmarks",
-  "version": "9.0",
+  "name": "New Tab Recent Bookmarks Reloaded",
+  "version": "1.0",
   "description": "Show pinned folders and recent bookmarks on new tab page.",
-  "homepage_url": "https://github.com/Zren/NewTabRecentBookmarks",
+  "homepage_url": "https://github.com/lachlanmcmillan/NewTabRecentBookmarks",
   "icons": {
     "48": "icons/ntrb-logo-48.png",
     "96": "icons/ntrb-logo-96.png"
