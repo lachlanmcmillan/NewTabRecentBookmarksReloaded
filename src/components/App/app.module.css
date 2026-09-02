@@ -1,12 +1,6 @@
+/* Groups are laid out by the Masonry component; this only adds page padding. */
 .kanban {
-  width: 100%;
-  height: calc(100vh - 70px);
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: safe center;
-  overflow-x: auto;
-  row-gap: 20px;
+  padding: 0 20px 20px;
 }
 
 /* display: none would stop favicons from loading, so hide with opacity. */

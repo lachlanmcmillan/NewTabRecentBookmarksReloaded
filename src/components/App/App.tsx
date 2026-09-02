@@ -11,6 +11,7 @@ import { KanbanGroup } from '../KanbanGroup/KanbanGroup';
 import { EditBookmarkModal } from '../EditBookmarkModal/EditBookmarkModal';
 import { SettingsModal } from '../SettingsModal/SettingsModal';
 import { SearchBar, SEARCH_INPUT_ID } from '../SearchBar/SearchBar';
+import { Masonry } from '../Masonry/Masonry';
 import styles from './app.module.css';
 
 interface FolderGroup {
@@ -33,6 +34,15 @@ interface AppState {
 }
 
 const SEARCH_DEBOUNCE_MS = 600;
+/** Kanban width (px) → number of columns. Columns are 320px plus a 20px gutter, page padding 40px. */
+const COLUMN_BREAKPOINTS: Record<number, number> = {
+  0: 1,
+  700: 2,
+  1040: 3,
+  1380: 4,
+  1720: 5,
+  2060: 6,
+};
 
 function debounce<A extends unknown[]>(
   func: (...args: A) => void,
@@ -331,9 +341,14 @@ export class App extends Component<{}, AppState> {
           onQueryChange={this.onQueryChange}
           onSettingsClick={this.openSettings}
         />
-        <div class={styles.kanban + (pageLoaded ? '' : ' ' + styles.loading)}>
+        <Masonry
+          class={styles.kanban + (pageLoaded ? '' : ' ' + styles.loading)}
+          columnsCountBreakPoints={COLUMN_BREAKPOINTS}
+          gutter="20px"
+        >
           {searchResults !== null ? (
             <KanbanGroup
+              key="search"
               groupId="search"
               title="Search"
               bookmarks={searchResults}
@@ -341,14 +356,16 @@ export class App extends Component<{}, AppState> {
               {...groupProps}
             />
           ) : (
-            <>
+            // A flat array, not a Fragment: Masonry needs each group as its own child.
+            [
               <KanbanGroup
+                key="recent"
                 groupId="recent"
                 title="Recent"
                 bookmarks={recentBookmarks}
                 {...groupProps}
-              />
-              {pinnedFolders.map(folderId => {
+              />,
+              ...pinnedFolders.map(folderId => {
                 const group = folderGroups[folderId];
                 if (!group) return null;
                 return (
@@ -367,10 +384,10 @@ export class App extends Component<{}, AppState> {
                     {...groupProps}
                   />
                 );
-              })}
-            </>
+              }),
+            ]
           )}
-        </div>
+        </Masonry>
         {editingBookmarkId && (
           <EditBookmarkModal
             bookmarkId={editingBookmarkId}

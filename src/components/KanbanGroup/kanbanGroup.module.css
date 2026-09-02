@@ -33,5 +33,4 @@
 .placeList {
   display: flex;
   flex-direction: column;
-  overflow-y: hidden;
 }
